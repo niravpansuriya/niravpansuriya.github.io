@@ -1,0 +1,120 @@
+ % ===========================================================================
+% Title:
+% ---------------------------------------------------------------------------
+% to create Type I fonts type "dvips -P cmz -t letter <filename>"
+% ===========================================================================
+\documentclass[11pt]{article}       %--- LATEX 2e base
+\usepackage{latexsym}               %--- LATEX 2e base
+%---------------- Wide format -----------------------------------------------
+\textwidth=6in \textheight=9in \oddsidemargin=0.25in
+\evensidemargin=0.25in \topmargin=-0.5in
+%--------------- Slide --------------------------------------------------
+\newenvironment{slide}[1]        {\section{#1} \begin{itemize}}%
+                                 {\end{itemize}}
+                                 % usage: \begin{slide}{---SLIDE TITLE---}
+                                 %        \item ...
+                                 %        \item ...
+                                 %        \item ...
+                                 %        \end{slide}
+% ===========================================================================
+\begin{document}
+% ===========================================================================
+
+% ############################################################################
+% Title
+% ############################################################################
+\newcommand{\SubItem}[1]{
+    {\setlength\itemindent{15pt} \item[-] #1}
+}
+\title{PRESENTATION OUTLINE: A Parallel Jacobi-Embedded Gauss-Seidel Method}
+
+
+% ############################################################################
+% Author(s) (no blank lines !)
+\author{
+% ############################################################################
+Nirav Pansuriya\\
+School of Computer Science\\
+Carleton University\\
+Ottawa, Canada K1S 5B6\\
+{\em niravchhaganbhaipan@cmail.carleton.ca}
+% ############################################################################
+} % end-authors
+% ############################################################################
+
+\maketitle
+
+% ############################################################################
+\begin{slide}{Introduction}
+\item Student Name
+\item Student Id Number
+\item Title of the project
+\end{slide}
+
+
+% ############################################################################
+\begin{slide}{Computer Methods to solve linear equations}
+\item Direct Method
+\item Iterative Method
+\item Name of methods which are used in my work
+\end{slide}
+
+\begin{slide}{Jacobian Method}
+\item Quick explaination of how this method workds?
+\item Advantages and Disadvantages (as they are used in my work)
+\end{slide}
+
+\begin{slide}{Gauss Seidel Method}
+\item Quick explaination of how this method workds?
+\item Advantages and Disadvantages
+\end{slide}
+
+\begin{slide}{Row based parallel Gauss Seidel Method}
+\item Quick explaination of how this method workds?
+\item Different ways to implement this method in parallel system
+\item Comparision between those ways
+\end{slide}
+
+\begin{slide}{PJG Method}
+\item Quick explaination of how this method workds?
+\item What is block size P in this method?
+\end{slide}
+
+\begin{slide}{Block Size P}
+\item Significance of block size P
+\item Analysis of PJG method with different block size P
+\item How I have used this analysis in my work?
+\end{slide}
+
+\begin{slide}{Questions for audience}
+\item Three question for audience to make sure they understand research talk till now
+\end{slide}
+
+\begin{slide}{My Approch}
+\item My hypothesis of this work
+\item Results of the hypothesis
+\end{slide}
+
+\begin{slide}{Environment Specifications}
+\item Specifications of GPU
+\end{slide}
+
+\begin{slide}{Results}
+\item Comparision of all mentiond methods with my approch in terms of performance
+\end{slide}
+
+\begin{slide}{Conclusion}
+\item Conclusion of my work that audience should remember from research talk
+\end{slide}
+
+\begin{slide}{Questions for audience}
+\item Two questions for audience to make sure that they understand my research talk
+\end{slide}
+% ############################################################################
+% Bibliography
+% ############################################################################
+\bibliographystyle{plain}     %loads my-bibliography.bib
+
+% ============================================================================
+\end{document}
+% ============================================================================
