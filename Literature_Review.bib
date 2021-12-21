@@ -95,8 +95,8 @@ Large linear equation systems are used in many complex scientific simulators. So
 \\
 \\In paper [5], the author has come up with a new parallel method to solve linear equations by combining two other algorithms. The author has combined the parallel nature of the Jacobian method and the Fast convergence of the GS method. In this new approach, one has to divide the matrix into some size of blocks. One will use the Jacobian method to solve the block, as we can easily implement the Jacobian method in a parallel system, so the block will be solved parallelly. After that, variables for that block will be updated as we do in the GS method, and the next block will be solved based on updated variables. This new approach is called the PJG method. The author did not write any code of this method.
 \\
-\\My aim is to combine the PJG method and row-based method and come up with a new approach. I will also implement the row-based method and the PJG method. And after that, I will compare the performance of my approach with the PJG method and row-based method. I will also try to implement my approach in distributed memory environment. My other aim is to do a performance analysis of the PJG method by choosing different block sizes, so I can use that in my approach also. 
-% ############################################################################
+\\My aim is to combine the PJG method and row-based method and come up with a new approach. I will also implement the row-based method and the PJG method. And after that, I will compare the performance of my approach with the PJG method and row-based method. I will also try to implement my approach in distributed memory environment. My other aim is to do a performance analysis of the PJG method by choosing different block sizes, so I can use that in my approach also.
+
 % Bibliography
 % ############################################################################
 \bibliographystyle{plain}
