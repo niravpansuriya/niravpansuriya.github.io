@@ -519,10 +519,10 @@ The computer hardware used in this experiment is equipped with used an NVIDEA T4
 \subsection{Simulation Settings} \label{simulation_settings}
 % ############################################################################
 
-To provide a comprehensive performance report, simulation settings cover two types of systems with liner equations: large systems and small systems. A total of seven algorithms were used in this experiment. Those algorithms are the Jacobi Algorithm, the Jacobi algorithm with a parallel version of the Jacobi algorithm, the GS algorithm, the Row Based method, the sequantial version of the PJG method, the parallel version of the PJG method, and the proposed method (the PJG method with dynamic parallelization). All algorithms are tested on the same inputs.
+To provide a comprehensive performance report, simulation settings cover two types of systems with liner equations: large systems and small systems. A total of seven algorithms were used in this experiment. Those algorithms are the Jacobi Algorithm, the Jacobi algorithm with a parallel version of the Jacobi algorithm, the GS algorithm, the Row Based method, the sequential version of the PJG method, the parallel version of the PJG method, and the proposed method (the PJG method with dynamic parallelization). All algorithms are tested on the same inputs.
 \\
 \\
-The first test is conducted with a small system of linear equations. A total of 50 equations are used. The block size is 10 for the PJG method. The second test is conducted with a large system of linear equations. A total of 1000 equations are used. The block size is 35 for the PJG method. The third test is also conducted with 1000 linear equations and with block size 35. But in this particular test, all algorithms are forced to run for 1000 iterations instead of until convergence is achieved.
+The first test is conducted with a small system of linear equations. A total of 50 equations are used. The block size is 10 for the PJG method. The second test is conducted with a large system of linear equations. A total of 1000 equations are used. The block size is 35 for the PJG method. The third test is also conducted with 1000 linear equations and with block size 35. But in this particular test, all algorithms are forced to run for 10000 iterations instead of until convergence is achieved.
 
 % ############################################################################
 \subsection{Results} \label{results}
@@ -550,8 +550,8 @@ PJG (Parallel)    & 0.00077216  & 9   \\ \hline
 \begin{tabular}{|l|l|l|l|}
 \hline
 Method                                                                   & \begin{tabular}[c]{@{}l@{}}Time\\ (Seconds)\end{tabular} & Iterations \\ \hline
-Jacobi            & 99.802    & 1000 (no convergence) \\ \hline
-Jacobi (Parallel) & 5.69737   & 1000 (no convergence) \\ \hline
+Jacobi            & 99.802    & 10000 (no convergence) \\ \hline
+Jacobi (Parallel) & 5.69737   & 10000 (no convergence) \\ \hline
 Gauss Seidel      & 0.0992823 & 10                    \\ \hline
 \begin{tabular}[c]{@{}l@{}}Row Based \\ Parallel Method\end{tabular}     & 0.0930212                                                & 10         \\ \hline
 PJG (Sequential)  & 0.267712  & 10                    \\ \hline
@@ -576,7 +576,7 @@ PJG (Sequential)                                                         & 5.549
 PJG (Parallel)                                                           & 0.770                                                   \\ \hline
 \begin{tabular}[c]{@{}l@{}}PJG \\ (Dynamic Parallelization)\end{tabular} & 0.587                                                    \\ \hline
 \end{tabular}
-\caption{\\ Iteraions : 1000 \\ Number of equations : 1000 \\ Block size : 35}
+\caption{\\ Iteraions : 10000 \\ Number of equations : 1000 \\ Block size : 35}
 \label{table:3}
 \end{table}
 
@@ -584,7 +584,7 @@ PJG (Parallel)                                                           & 0.770
 Table ~\ref{table:1} summarizes the results of the first test (small system of linear equations). The Jacobi method required 478 iterations to solve 50 linear equations, whereas the GS and PJG methods required just 7 and 9 iterations, respectively. A critical point to note here is that all parallel algorithms take longer than their sequential counterparts for small system. This is because the degree of parallelization highly depends on the number of equations. If the number of equations is small, kernel launch and data operations cancel out any benefit gained by parallel operations.
 \\
 \\
-Results for the second test (a large system of linear equations) are shown in Table ~\ref{table:2}. The number of equations is 1000, and the block size for the PJG is 35. The Jacobi method (parallel version) achieved a 17.5x speedup compared to its sequential version. But even after 1000 iterations, it does not solve equations. All other methods take only 10 iterations to solve 1000 linear equations. The GS algorithm took almost the same time in the parallel and sequential versions. No significant speedup was observed in this test for the GS algorithm. The proposed algorithm (the PJG with dynamic parallelization) takes the least amount of time of all the other algorithms. The PJG algorithm (parallel version) and the proposed algorithm achieved 5.74x and 6.78x speedup compared to the PJG (sequential version). When compared to the GS method, the proposed method achieved a 2.5x speedup, while the PJG method (parallel version) achieved a 1.75x speedup. Here, there is no significant performance enhancement observed, this is because the GS algorithm and the PJG algorithm solved 1000 equations in just 10 iterations.
+Results for the second test (a large system of linear equations) are shown in Table ~\ref{table:2}. The number of equations is 1000, and the block size for the PJG is 35. The Jacobi method (parallel version) achieved a 17.5x speedup compared to its sequential version. But even after 10000 iterations, it does not solve equations. All other methods take only 10 iterations to solve 1000 linear equations. The GS algorithm took almost the same time in the parallel and sequential versions. No significant speedup was observed in this test for the GS algorithm. The proposed algorithm (the PJG with dynamic parallelization) takes the least amount of time of all the other algorithms. The PJG algorithm (parallel version) and the proposed algorithm achieved 5.74x and 6.78x speedup compared to the PJG (sequential version). When compared to the GS method, the proposed method achieved a 2.5x speedup, while the PJG method (parallel version) achieved a 1.75x speedup. Here, there is no significant performance enhancement observed, this is because the GS algorithm and the PJG algorithm solved 1000 equations in just 10 iterations.
 \\
 \\
 Results for the test (large system but all algorithms are forced to run for 1000 iterations) are shown in table ~\ref{table:3}. The number of equations is 1000 and the block size is 35 for the PJG method. The Jacobi algorithm achieved a 20.6x speedup, but in this test also, the algorithm does not solve the equations after 1000 iterations. The proposed algorithm took the least time (the Jacobi method does not solve equations, so its results are not considered). The PJG method (parallel version) and the proposed method achieved 7.2x and 9.45x speedup, respectively, when compared with the sequential version of the PJG method. When compared to the sequential version of the GS method, the parallel version of the PJG method achieved a 7.1x speedup, while the proposed method achieved a 9.4x speedup.
