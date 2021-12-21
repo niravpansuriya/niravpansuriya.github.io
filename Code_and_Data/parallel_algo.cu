@@ -248,7 +248,7 @@ void print_matrix(float *matrix, int number_of_rows, int number_of_columns)
 
 void jacobian(float *weights, float *X, float *constants, int size)
 {
-	cout << "Jacobian method---------------------------------------------------" << endl;
+	cout << "Jacobian method" << endl;
 	float *X_prev = (float*) malloc(size* sizeof(float));
 	initialize_X(X, size);
 	copy_array(X, X_prev, size);
@@ -277,19 +277,14 @@ void jacobian(float *weights, float *X, float *constants, int size)
 	}
 
 	cout << endl;
-
-	// cout << "variables..." << endl;
-	// print_matrix(X, size, 1);
-	// cout << endl;
-
-	cout << "iterations..." << iterations << endl;
+	cout << "iterations... " << iterations << endl;
 	free_memory(X_prev);
 
 }
 
 void PJG(float *weights, float *X, float *constants, int P, int size)
 {
-	cout << "PJG method---------------------------------------------------" << endl;
+	cout << "PJG method";
 	float *X_prev = (float*) malloc(P* sizeof(float));
 	initialize_X(X, size);
 	initialize_X(X_prev, P);
@@ -335,12 +330,11 @@ void PJG(float *weights, float *X, float *constants, int P, int size)
         if(iterations == BREAK) break;
 	}
 
-	cout << endl;
-
 	// cout << "variables..." << endl;
 	// print_matrix(X, size, 1);
 	// cout << endl;
 
+	cout << endl;
 	cout << "iterations..." << iterations << endl;
 	free_memory(X_prev);
 
@@ -384,7 +378,7 @@ __global__ void update_X_PJG_parallel(float *d_X, float* d_Predictions, int P, i
 
 void PJG_parallel(float *weights, float *X, float *constants, int P, int size)
 {
-	cout << "PJG parallel method---------------------------------------------------" << endl;
+	cout << "PJG parallel method" << endl;
 	
 	int blocks = P/256+1;
 	int threads = 256;
@@ -429,12 +423,12 @@ void PJG_parallel(float *weights, float *X, float *constants, int P, int size)
 
 	// transfer variables X to host
 	cudaMemcpy(X, d_X, sizeof(float)*size, cudaMemcpyDeviceToHost);
-	cout << endl;
 
 	// cout << "variables..." << endl;
 	// print_matrix(X, size, 1);
 	// cout << endl;
 
+	cout << endl;
 	cout << "iterations..." << iterations << endl;
 
 	// destroy memory in device
@@ -450,7 +444,7 @@ void PJG_parallel(float *weights, float *X, float *constants, int P, int size)
 
 void gauss_seidel(float *weights, float *X, float *constants, int size)
 {
-	cout << "Gauss Seidel method---------------------------------------------------" << endl;
+	cout << "Gauss Seidel method" << endl;
 	initialize_X(X, size);
 
 	bool convergence = false;
@@ -476,13 +470,12 @@ void gauss_seidel(float *weights, float *X, float *constants, int size)
 		if(iterations == BREAK)	break;
 	}
 
-	cout << endl;
 
 	// cout << "variables..." << endl;
 	// print_matrix(X, size, 1);
 	// cout << endl;
-
-	cout << "iterations..." << iterations << endl;
+	cout << endl;
+	cout << "iterations... " << iterations << endl;
 
 }
 
@@ -615,7 +608,7 @@ void jacobianParallelMethod(float *weights, float *X, float *constants, int size
 	int threads = 256;
 	if (shouldExchangeError)
 	{
-		cout << "Jacobian Parallel Method with Exchange Error..." << endl;
+		cout << "Jacobian Parallel Method" << endl;
 
 		float *d_X_prev, *d_X, *d_weights, *d_constants, *d_predictions;
 		cudaMalloc(&d_weights, sizeof(float) *size *size);
@@ -635,7 +628,6 @@ void jacobianParallelMethod(float *weights, float *X, float *constants, int size
 		initialize_x_parallel <<<size / 256 + 1, 256>>> (d_X_prev, size);
 		initialize_x_parallel <<<size / 256 + 1, 256>>> (d_X, size);
        
-		cout<<"1st phase"<<kernal_time<<endl;
 		long iterations = 0;
 		bool is_convergence = false;
 	
@@ -662,10 +654,6 @@ void jacobianParallelMethod(float *weights, float *X, float *constants, int size
 			if(iterations == BREAK)	break;
 		}
 
-		cout<<"total_time"<<total_time<<endl;
-		cout<<endl;
-        cout<<"Execution complete..."<<endl;
-
         if(iterations % 2 == 0){
             cudaMemcpy(X, d_X_prev, sizeof(float)*size, cudaMemcpyDeviceToHost);
         }
@@ -673,8 +661,12 @@ void jacobianParallelMethod(float *weights, float *X, float *constants, int size
             cudaMemcpy(X, d_X, sizeof(float)*size, cudaMemcpyDeviceToHost);
         }
 
-        // print_matrix(X, size, 1);
-        cout<<iterations<<endl;
+		// cout << "variables..." << endl;
+		// print_matrix(X, size, 1);
+		// cout << endl;
+
+		cout<<endl;
+        cout<<"iterations... "<<iterations<<endl;
 		cudaFree(d_X_prev);
 		cudaFree(d_X);
 		cudaFree(d_weights);
@@ -728,12 +720,12 @@ void PJG_parallel_improved(float *weights, float *X, float *constants, int P, in
 
 	// transfer variables X to host
 	cudaMemcpy(X, d_X, sizeof(float)*size, cudaMemcpyDeviceToHost);
-	cout << endl;
 
-	cout << "variables..." << endl;
-	print_matrix(X, size, 1);
-	cout << endl;
+	// cout << "variables..." << endl;
+	// print_matrix(X, size, 1);
+	// cout << endl;
 
+	cout << endl;
 	cout << "iterations..." << iterations << endl;
 
 	// destroy memory in device
@@ -741,13 +733,11 @@ void PJG_parallel_improved(float *weights, float *X, float *constants, int P, in
 	cudaFree(d_X);
 	cudaFree(d_constants);
 	cudaFree(d_predictions);
-
-	cout << "--------------------------------------------------------------------" << endl;
 }
 
 void PJG_parallel_improved_v2(float *weights, float *X, float *constants, int P, int size)
 {
-	cout << "PJG parallel improved v2 method---------------------------------------------------" << endl;
+	cout << "PJG parallel with Dynamic Parallelization" << endl;
 	
 	int blocks = (P*size)/1024+1;
 	int threads = 1024;
@@ -811,13 +801,13 @@ void PJG_parallel_improved_v2(float *weights, float *X, float *constants, int P,
 
 	// transfer variables X to host
 	cudaMemcpy(X, d_X, sizeof(float)*size, cudaMemcpyDeviceToHost);
-	cout << endl;
 
 	// cout << "variables..." << endl;
 	// print_matrix(X, size, 1);
 	// cout << endl;
 
-	cout << "iterations..." << iterations << endl;
+	cout<<endl;
+	cout << "iterations... " << iterations << endl;
 
 	// destroy memory in device
 	cudaFree(d_weights);
@@ -830,7 +820,7 @@ void rowBasedParallelMethod(float *weights, float *X, float *constants, int size
 	int blocks = (size / 256) + 1;
 	int threads = 256;
 
-	cout << "Row Based Parallel Method..." << endl;
+	cout << "Row Based Parallel Method" << endl;
 
 	float  *d_X, *d_weights, *d_constants, *d_predictions, *d_multiplications, *d_sum;
 
@@ -863,8 +853,11 @@ void rowBasedParallelMethod(float *weights, float *X, float *constants, int size
 		if(iterations == BREAK)	break;
 	}
     cudaMemcpy(X, d_X, sizeof(float)*size, cudaMemcpyDeviceToHost);
+
 	// print_matrix(X, size, 1);
-	cout<<"iterations "<<iterations<<endl;
+
+	cout<<endl;
+	cout<<"iterations... "<<iterations<<endl;
 	cudaFree(d_X);
 	cudaFree(d_weights);
 	cudaFree(d_constants);
@@ -905,8 +898,8 @@ int main()
 	cudaEventSynchronize(stop);
 	milliseconds = 0;
 	cudaEventElapsedTime(&milliseconds, start, stop);
-	cout<<"runtime is "<<milliseconds<<endl;
-	cout << "--------------------------------------------------------------------" << endl;
+	cout<<"runtime is "<<milliseconds<<" ms"<<endl;
+	cout << "--------------------------------------------------------------------" << endl<< endl;
 
 	// Parallel Jacobi Algorithm
 	cudaEventRecord(start);
@@ -914,8 +907,8 @@ int main()
 	cudaEventRecord(stop);
 	cudaEventSynchronize(stop);
 	cudaEventElapsedTime(&milliseconds, start, stop);
-	cout<<"runtime is "<<milliseconds<<endl;
-	cout << "--------------------------------------------------------------------" << endl;
+	cout<<"runtime is "<<milliseconds<<" ms"<<endl;
+	cout << "--------------------------------------------------------------------" << endl<< endl;
 
 	// Sequential GS Algorithm
 	cudaEventRecord(start);
@@ -923,8 +916,8 @@ int main()
 	cudaEventRecord(stop);
 	cudaEventSynchronize(stop);
 	cudaEventElapsedTime(&milliseconds, start, stop);
-	cout<<"runtime is "<<milliseconds<<endl;
-	cout << "--------------------------------------------------------------------" << endl;
+	cout<<"runtime is "<<milliseconds<<" ms"<<endl;
+	cout << "--------------------------------------------------------------------" << endl<< endl;
 
 	// Paralle Row-Based Method
 	cudaEventRecord(start);
@@ -932,8 +925,8 @@ int main()
 	cudaEventRecord(stop);
 	cudaEventSynchronize(stop);
 	cudaEventElapsedTime(&milliseconds, start, stop);
-	cout<<"runtime is "<<milliseconds<<endl;
-	cout << "--------------------------------------------------------------------" << endl;
+	cout<<"runtime is "<<milliseconds<<" ms"<<endl;
+	cout << "--------------------------------------------------------------------" << endl <<endl;
 
 	// Sequential PJG  Algorithm
 	cudaEventRecord(start);
@@ -941,8 +934,8 @@ int main()
 	cudaEventRecord(stop);
 	cudaEventSynchronize(stop);
 	cudaEventElapsedTime(&milliseconds, start, stop);
-	cout<<"runtime is "<<milliseconds<<endl;
-	cout << "--------------------------------------------------------------------" << endl;
+	cout<<"runtime is "<<milliseconds<<" ms"<<endl;
+	cout << "--------------------------------------------------------------------" << endl<<endl;
 
 	// Parallel PJG Algorithm
 	cudaEventRecord(start);
@@ -950,8 +943,8 @@ int main()
 	cudaEventRecord(stop);
 	cudaEventSynchronize(stop);
 	cudaEventElapsedTime(&milliseconds, start, stop);
-	cout<<"runtime is "<<milliseconds<<endl;
-	cout << "--------------------------------------------------------------------" << endl;
+	cout<<"runtime is "<<milliseconds<<" ms"<<endl;
+	cout << "--------------------------------------------------------------------" << endl<<endl;
     
 	// The proposed algorithm
 	// The PJG method with Dynamic Parallelization
@@ -960,8 +953,8 @@ int main()
 	cudaEventRecord(stop);
 	cudaEventSynchronize(stop);
 	cudaEventElapsedTime(&milliseconds, start, stop);
-	cout<<"runtime is "<<milliseconds<<endl;
-	cout << "--------------------------------------------------------------------" << endl;
+	cout<<"runtime is "<<milliseconds<<" ms"<<endl;
+	cout << "--------------------------------------------------------------------" << endl<<endl;
 
 	free_memory(weights);
 	free_memory(constants);
