@@ -898,6 +898,7 @@ int main()
 	cudaEventCreate(&stop);
 	float milliseconds;
 
+	// Sequential Jacobi Algorithm
 	cudaEventRecord(start);
 	jacobian(weights, X, constants, size);
 	cudaEventRecord(stop);
@@ -905,10 +906,9 @@ int main()
 	milliseconds = 0;
 	cudaEventElapsedTime(&milliseconds, start, stop);
 	cout<<"runtime is "<<milliseconds<<endl;
-
 	cout << "--------------------------------------------------------------------" << endl;
 
-	
+	// Parallel Jacobi Algorithm
 	cudaEventRecord(start);
     jacobianParallelMethod(weights, X, constants, size, true);
 	cudaEventRecord(stop);
@@ -917,7 +917,7 @@ int main()
 	cout<<"runtime is "<<milliseconds<<endl;
 	cout << "--------------------------------------------------------------------" << endl;
 
-
+	// Sequential GS Algorithm
 	cudaEventRecord(start);
     gauss_seidel(weights, X, constants, size);
 	cudaEventRecord(stop);
@@ -926,6 +926,7 @@ int main()
 	cout<<"runtime is "<<milliseconds<<endl;
 	cout << "--------------------------------------------------------------------" << endl;
 
+	// Paralle Row-Based Method
 	cudaEventRecord(start);
     rowBasedParallelMethod(weights, X, constants, size);
 	cudaEventRecord(stop);
@@ -934,7 +935,7 @@ int main()
 	cout<<"runtime is "<<milliseconds<<endl;
 	cout << "--------------------------------------------------------------------" << endl;
 
-
+	// Sequential PJG  Algorithm
 	cudaEventRecord(start);
     PJG(weights, X, constants, P, size);
 	cudaEventRecord(stop);
@@ -943,6 +944,7 @@ int main()
 	cout<<"runtime is "<<milliseconds<<endl;
 	cout << "--------------------------------------------------------------------" << endl;
 
+	// Parallel PJG Algorithm
 	cudaEventRecord(start);
     PJG_parallel(weights, X, constants, P, size);
 	cudaEventRecord(stop);
@@ -951,6 +953,8 @@ int main()
 	cout<<"runtime is "<<milliseconds<<endl;
 	cout << "--------------------------------------------------------------------" << endl;
     
+	// The proposed algorithm
+	// The PJG method with Dynamic Parallelization
 	cudaEventRecord(start);
     PJG_parallel_improved_v2(weights, X, constants, P, size);
 	cudaEventRecord(stop);
